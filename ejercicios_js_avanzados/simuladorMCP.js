@@ -12,15 +12,14 @@ class SimuladorMCP {
         }
 
        
-        if (token.length < 8) {
-            return {
-                exito: false,
-                mensaje: "Error: Token inválido - longitud mínima 8 caracteres",
-                codigo: 401,
-                longitudRecibida: token.length
-            };
-        }
-
+       if (!token || token.trim() === "") {
+    return {
+        exito: false,
+        mensaje: "Error: Token no proporcionado o vacío",
+        codigo: 400,
+        sugerencia: "Envía un token válido con al menos 8 caracteres"
+    };
+}
  
         return {
             exito: true,
