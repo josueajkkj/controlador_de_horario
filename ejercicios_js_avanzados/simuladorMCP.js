@@ -3,23 +3,26 @@ class SimuladorMCP {
  
     static conectar(token) {
    
-        if (!token) {
+        // Validación error 1: token vacío o solo espacios
+        if (!token || token.trim() === "") {
             return {
                 exito: false,
-                mensaje: "Error: Token no proporcionado",
-                codigo: 400
+                mensaje: "Error: Token no proporcionado o vacío",
+                codigo: 400,
+                sugerencia: "Envía un token válido con al menos 8 caracteres"
             };
         }
 
-       
-       if (!token || token.trim() === "") {
-    return {
-        exito: false,
-        mensaje: "Error: Token no proporcionado o vacío",
-        codigo: 400,
-        sugerencia: "Envía un token válido con al menos 8 caracteres"
-    };
-}
+        // Validación error 2: token muy corto (corregida con sugerencia)
+        if (token.length < 8) {
+            return {
+                exito: false,
+                mensaje: `Error: Token inválido - longitud mínima 8 caracteres`,
+                codigo: 401,
+                longitudRecibida: token.length,
+                sugerencia: `Tu token tiene ${token.length} caracteres, necesitas al menos 8`
+            };
+        }
  
         return {
             exito: true,
