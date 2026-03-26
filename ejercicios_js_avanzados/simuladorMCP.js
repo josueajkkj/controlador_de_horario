@@ -1,4 +1,4 @@
-
+// Probado en localhost con node
 class SimuladorMCP {
  
     static conectar(token) {
